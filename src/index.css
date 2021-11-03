@@ -3,7 +3,7 @@
 /* base styles */
 body {
   font-family: 'Fruktur';
-  text-shadow: 2px 0 0 black, 0 -2px 0 black, 0 2px 0 black, -2px 0 0 black;
+  text-shadow: 4px 0 0 black, 0 -4px 0 black, 0 4px 0 black, -4px 0 0 black;
   margin: 0;
   font-size: 1.8em;
   text-align: center;
