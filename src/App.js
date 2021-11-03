@@ -36,10 +36,22 @@ function App() {
 
   console.log(cards, turns)
 
+
+  //map over the cards and create divs for the front and back of each
   return (
     <div className="App">
       <h1>Memory Master</h1>
       <button onClick={shuffleCards}>New Game!</button>
+      <div className='card-grid'>
+        {cards.map(card => (
+          <div className='card' key={card.id}>
+            <div>
+              <img className='front' alt='card-front' src={card.src} />
+              <img src='/img/cover.png' className='back' alt='card-back' />
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
