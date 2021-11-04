@@ -18,8 +18,9 @@ function App() {
   const [turns, setTurns] = useState(0)
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
+  const [disabled, setDisabled] = useState(false)
 
-  //shuffle cards, first duplicate cards, randomize cards, assign random ids
+  //STARTS NEW GAME: shuffle cards, duplicate cards so we have pairs to match with, randomize cards, assign random ids
   //fires on click for New Game button
   const shuffleCards = () => {
 
@@ -31,6 +32,9 @@ function App() {
     .sort(() => Math.random() - 0.5)
     .map((card) => ({...card, id: Math.random()}))
 
+    //set our choices to null to prevent choices being carried over between games
+    setChoiceOne(null)
+    setChoiceTwo(null)
     //setCards array to our newly shuffled deck and reset turn counter to 0
     setCards(shuffledCards)
     setTurns(0)
@@ -39,10 +43,8 @@ function App() {
 
   //track user choices
   const handleChoice = (card) => {
-
     //if choiceOne is null (false), setChoiceOne, if it has a value (true), setChoiceTwo
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
-    
   }
 
   //compare choiceOne and choiceTwo, fires whenever a new card is chosen
@@ -50,6 +52,8 @@ function App() {
 
     //if we've selected a pair of cards
     if (choiceOne && choiceTwo) {
+      //disable other cards while we check the currently selected ones for matches
+      setDisabled(true)
       //if the images match
       if (choiceOne.src === choiceTwo.src) {
         //update the state of Cards
@@ -73,10 +77,16 @@ function App() {
     }
   }, [choiceOne, choiceTwo])
 
+  //start the game automatically on first page load
+  useEffect(() => {
+    shuffleCards()
+  }, [])
+
   const resetTurn = () => {
     setChoiceOne(null)
     setChoiceTwo(null)
     setTurns(prevTurns => prevTurns + 1)
+    setDisabled(false)
   }
   
   //map over the SingleCards and create divs for the front and back of each
@@ -91,8 +101,10 @@ function App() {
               card={card} 
               handleChoice={handleChoice}
               flipped={card === choiceOne || card === choiceTwo || card.matched}
+              disabled={disabled}
             />))}
       </div>
+      <p>Turns: {turns}</p>
     </div>
   </>
 }
