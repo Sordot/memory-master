@@ -92,7 +92,7 @@ function App() {
   //map over the SingleCards and create divs for the front and back of each
   return <>
     <div className="App">
-      <h1>Memory Master</h1>
+      <h1 className='text'>Memory Master</h1>
       <button onClick={shuffleCards}>New Game!</button>
       <div className='card-grid'>
             {cards.map(card => (
@@ -104,7 +104,7 @@ function App() {
               disabled={disabled}
             />))}
       </div>
-      <p>Turns: {turns}</p>
+      <h3 className='text'>Turns: {turns}</h3>
     </div>
   </>
 }

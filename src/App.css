@@ -3,6 +3,12 @@
     margin: 40px auto;
 }
 
+.text {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    
+}
+
 button {
     background: none;
     border: 4px solid floralwhite;
